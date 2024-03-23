@@ -1,0 +1,18 @@
+---
+import Sidebar from '../components/Sidebar.astro';
+import Topbar from '../components/Topbar.astro'
+import '../styles/base.css';
+const { frontmatter } = Astro.props;
+---
+
+<div class="w-full">
+    <div class="block">
+        <Topbar />
+    </div>
+    <div class="flex flex-row">
+        <Sidebar active={frontmatter.header} />
+        <div class="w-full">
+            <slot />
+        </div>
+    </div>
+</div>
