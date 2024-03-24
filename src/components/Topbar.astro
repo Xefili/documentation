@@ -2,11 +2,15 @@
 const { any } = Astro.props;
 ---
 
-<div class="w-full h-12 p-2">
-    <div class="float-left">
+<div class="w-full h-12 p-2 flex justify-between">
+    <div class="align-left">
         <a href="/Introduction/Overview">Documentation @ v0.0.2</a>
     </div>
-    <div class="float-right">
+    <div class="float-center">
+        <span class="font-mono">xefili@xefili.dev:~</span>
+        <input class="font-mono focus:outline-none bg-transparent" placeholder="search...">
+    </div>
+    <div class="justify-flex-end">
         <a>Home</a>
         <a class="ml-4">Blog</a>
         <a class="ml-4">Github</a>
