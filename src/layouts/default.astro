@@ -10,7 +10,7 @@ const { frontmatter } = Astro.props;
         <Topbar />
     </div>
     <div class="flex flex-row">
-        <Sidebar active={frontmatter.header} />
+        <Sidebar active={frontmatter.header} parentSection={frontmatter.parentSection} />
         <div class="w-full">
             <slot />
         </div>
