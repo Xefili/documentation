@@ -6,13 +6,7 @@
     body {
         @apply w-full;
     }
-    h1 {
-        @apply text-3xl font-sans;
-    }
-    h2 {
-        @apply text-2xl font-sans p-0;
-    }
-    h3 {
-        @apply text-xl font-sans;
+    .main, .intro, .docs, .blog {
+        @apply border-l-[1px] border-slate-600 pl-4 text-slate-400 py-1;
     }
 }
