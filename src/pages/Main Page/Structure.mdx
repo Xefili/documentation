@@ -3,3 +3,57 @@ layout: ../../layouts/default.astro
 parentSection: main
 header: Structure
 ---
+
+# Structure
+
+The structure of the main page is set up into two sections, the navbar and the main page content. In the following snippet, you can see the actual code behind the first section. The classes are the result of TailwindCSS, the CSS framework used in my website the simplify the design. Tailwinds utility classes let you work with contrains, so you don't overcomplicate your design. More infomation at [TailwindCSS.com](https://tailwindcss.com/)
+<customspacer />
+## Navigation Bar
+
+```html
+<pageHead class="fixed block h-12 w-full bg-[#30aec4a9] dark:bg-gradient-to-r from-blue-600 to-violet-600 backdrop-blur-lg z-20">
+    <leftDivision class="h-12 inline-grid grid-cols-[1fr 1fr] gap-2 justify-center items-center">
+        <logo><img class="col-span-1 w-8 h-8 ml-2" src="assets/Bucket Helper.svg" alt="Bucket Lounge Logo"></logo>
+        <logoText class="col-start-2">
+            <span class="font-headerFont font-black">Xefili.dev</span>
+        </logoText>
+    </leftDivision>
+    <navBar class="flex float-right h-12 items-center justify-evenly">
+        <a href="index.html">
+            <home class="flex items-center font-black mr-8 md:before:content-['Home⠀']"><span class="material-symbols-outlined">home</span></home>
+        </a>
+        <a href="blog.html">
+            <blog class="flex items-center font-black mr-8 md:before:content-['Blog⠀']"><span class="material-symbols-outlined">chat</span></Blog>
+        </a>
+        <a href="https://xefili.dev/docs">
+            <docs class="flex items-center font-black mr-8 md:before:content-['Documentation⠀']"><span class="material-symbols-outlined">description</span></Docs>
+        </a>
+        <a href="tools.html">
+            <tools class="flex items-center font-black mr-8 md:before:content-['Tools⠀']"><span class="material-symbols-outlined">construction</span></search>
+        </a>
+    </navBar>
+</pageHead>
+```
+<customspacer />
+The navbar (or pageHead here) consists of two sections, the `leftDivision` and the `navBar`.
+<customspacer />
+### `leftDivision`
+
+The left division contains my logo, aswell as the site title in the `<logoText>` element.
+<customspacer />
+### `navBar`
+
+The navBar element is a wrapper for the four links inside. These are being distributed evenly with the use of a flexbox. They contain an invisible unicode character and a span with the `material-symbols-outlined` class. This span element applies the special Material Symbols font from Google to the text inside. The result looks like this:
+
+<link
+	rel="stylesheet"
+	href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,1,0"
+/>
+<div class="w-full flex justify-center">
+	<div class="flex justify-evenly my-8 w-1/3">
+		<span class="material-symbols-outlined">home</span>
+		<span class="material-symbols-outlined">chat</span>
+		<span class="material-symbols-outlined">description</span>
+		<span class="material-symbols-outlined">construction</span>
+	</div>
+</div>
