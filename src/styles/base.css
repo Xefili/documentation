@@ -3,6 +3,10 @@
 @tailwind utilities;
 
 @layer base {
+    @font-face {
+        font-family: "Jetbrains Mono";
+        src: url(../assets/JetBrainsMono-Regular.woff2) format("woff2");
+    }
     body {
         @apply w-full;
     }

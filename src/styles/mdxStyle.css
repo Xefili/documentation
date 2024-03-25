@@ -1,0 +1,21 @@
+.containsMDX h1 {
+    @apply text-2xl underline;
+}
+.containsMDX h2 {
+    @apply text-2xl;
+}
+.containsMDX h3 {
+    @apply text-xl;
+}
+.containsMDX customspacer {
+    @apply w-full h-8 block;
+}
+.containsMDX pre>code {
+    @apply font-mono;
+}
+.containsMDX a {
+    @apply text-sky-500 underline underline-offset-4;
+}
+.containsMDX code {
+    @apply bg-[#24292e];
+}
