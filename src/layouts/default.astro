@@ -2,6 +2,7 @@
 import Sidebar from '../components/Sidebar.astro';
 import Topbar from '../components/Topbar.astro'
 import '../styles/base.css';
+import '../styles/mdxStyle.css';
 const { frontmatter } = Astro.props;
 ---
 
@@ -11,7 +12,7 @@ const { frontmatter } = Astro.props;
     </div>
     <div class="flex flex-row">
         <Sidebar active={frontmatter.header} parentSection={frontmatter.parentSection} />
-        <div class="w-full">
+        <div class="w-full containsMDX">
             <slot />
         </div>
     </div>
