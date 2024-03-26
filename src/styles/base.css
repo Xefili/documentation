@@ -11,6 +11,6 @@
         @apply w-full;
     }
     .main, .intro, .docs, .blog {
-        @apply border-l-[1px] border-slate-600 pl-4 text-slate-400 py-1;
+        @apply text-slate-400 py-1 ml-2;
     }
 }
