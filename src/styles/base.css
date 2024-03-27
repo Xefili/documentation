@@ -13,4 +13,7 @@
     .main, .intro, .docs, .blog {
         @apply text-slate-400 py-1 ml-2;
     }
+    #borders {
+        @apply border-[1px] border-transparent hover:border-[1px] hover:border-gray-500 hover:rounded-lg;
+    }
 }
