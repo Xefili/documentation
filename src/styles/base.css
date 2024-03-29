@@ -10,10 +10,13 @@
     body {
         @apply w-full;
     }
-    .main, .intro, .docs, .blog {
+    .main, .intro, .docs, .blog, .api {
         @apply text-slate-400 py-1 ml-2;
     }
     #borders {
         @apply border-[1px] border-transparent hover:border-[1px] hover:border-gray-500 hover:rounded-lg;
+    }
+    Topbar {
+        @apply z-50 absolute
     }
 }
