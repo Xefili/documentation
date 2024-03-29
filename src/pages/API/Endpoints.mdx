@@ -1,0 +1,44 @@
+---
+layout: "../../layouts/default.astro"
+header: "Endpoints"
+parentSection: "api"
+---
+
+# Endpoints
+<customspacer />
+## `/articles`
+
+This endpoint allows the method `GET` and returns an array of articles, preferably in this layout:
+<customspacer />
+```json
+// json
+{
+    "id": 0,
+    "title": "The title of the article",
+    "content": "The text, (can contain HTML, safe)",
+    "time": {
+        "year": 2024,
+        "month": 1,
+        "day": 31,
+        "hhmm": "16:40"
+    },
+    "tags": [
+        "usually empty", "not implemented"
+    ],
+    "customLink": null, // reserved, is usually null but can be a string
+}
+```
+
+## `documentation`
+
+This endpoint allows the method `GET` and returns an array of every page, aswell as the first and all second headings on the respective pages. Third headings are not included. <br/> The syntax should look like this:
+
+```json
+// json
+{
+    "id": 0,
+    "name": "Page - Heading",
+    "relativeLink": "/Section/Page#Heading"
+}
+```
+This endpoint is used for the search, as the api supports full text search. 
