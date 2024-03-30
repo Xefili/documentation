@@ -8,7 +8,13 @@
     </div>
     <div class="float-center">
         <span class="font-mono">xefili@xefili.dev:~</span>
-        <input class="font-mono focus:outline-none bg-transparent" placeholder="search...">
+        <input id="searchBox" class="font-mono focus:outline-none bg-transparent" placeholder="search...">
+        <div class="text-white w-96 h-48 [backdrop-filter:blur(35px)] rounded-lg bg-[#00000070] hidden" id="resultBox">
+            <ul class="text-center text-xl">
+                <li><a class="li hidden"></a></li>
+                <li><a class="li hidden" id="isSecondElement"></a></li>
+            </ul>
+        </div>
     </div>
     <div class="justify-flex-end">
         <a>Home</a>
@@ -16,3 +22,29 @@
         <a class="ml-4">Github</a>
     </div>
 </div>
+<script is:inline>
+document.getElementById("searchBox").addEventListener("input", async() => {
+    document.getElementById("resultBox").classList.remove("hidden");
+    let val = document.getElementById("searchBox").value;
+    let data = await fetch(`https://api.xefili.dev/documentation?name_like=${val}&_limit=2`, {method:"GET"}); // check API reference @ beta.xefili.dev/API/Endpoints
+    let jsonData = await data.json();
+    if(jsonData.length == 2) {
+        if(val == "") {
+            document.getElementById("resultBox").classList.add("hidden");
+        }
+        document.getElementsByClassName("li")[0].classList.remove("hidden");
+        document.getElementsByClassName("li")[0].innerHTML = jsonData[0].name;
+        document.getElementsByClassName("li")[0].setAttribute("href", jsonData[0].relativeLink);
+
+        document.getElementsByClassName("li")[1].classList.remove("hidden");
+        document.getElementsByClassName("li")[1].innerHTML = jsonData[1].name;
+        document.getElementsByClassName("li")[1].setAttribute("href", jsonData[1].relativeLink);
+    }
+    if(jsonData.length == 1) {
+        document.getElementsByClassName("li")[0].innerHTML = jsonData[0].name;
+        document.getElementsByClassName("li")[0].setAttribute("href", jsonData[0].relativeLink);
+        document.getElementById("isSecondElement").classList.add("hidden");
+    }
+})
+
+</script>
