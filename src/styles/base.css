@@ -7,6 +7,9 @@
         font-family: "Jetbrains Mono";
         src: url(../assets/JetBrainsMono-Regular.woff2) format("woff2");
     }
+    html {
+        @apply bg-[#1f1f1f];
+    }
     body {
         @apply w-full;
     }
