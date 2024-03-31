@@ -3,6 +3,8 @@ layout: "../../layouts/default.astro"
 header: "Endpoints"
 parentSection: "api"
 ---
+{/* Imports */}
+import Warning from '../../components/blockquotes/Warning.astro'
 
 # Endpoints
 <customspacer />
@@ -28,10 +30,12 @@ This endpoint allows the method `GET` and returns an array of articles, preferab
     "customLink": null, // reserved, is usually null but can be a string
 }
 ```
-
+<customspacer />
 ## `documentation`
 
-This endpoint allows the method `GET` and returns an array of every page, aswell as the first and all second headings on the respective pages. Third headings are not included. <br/> The syntax should look like this:
+This endpoint allows the method `GET` and returns an array of every page, aswell as the first and all second headings on the respective pages.
+<Warning content="Third headings are not supported!" title="Warning" />
+The syntax should look like this:
 
 ```json
 // json
