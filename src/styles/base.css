@@ -22,7 +22,4 @@
     Topbar {
         @apply z-50 absolute
     }
-    pre {
-        @apply absolute w-4/5;
-    }
 }

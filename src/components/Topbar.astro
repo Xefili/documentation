@@ -1,10 +1,10 @@
 ---
-
+const { lang } = Astro.props;
 ---
 
 <div class="w-full h-12 p-2 flex justify-between">
     <div class="align-left">
-        <a href="/Introduction/Overview">Documentation @ v0.0.5</a>
+        <a id="backToStartBTN" href="/en/Introduction/Overview">Documentation @ v0.0.5</a>
     </div>
     <div class="float-center">
         <span class="font-mono">xefili@xefili.dev:~</span>
@@ -22,7 +22,14 @@
         <a class="ml-4" href="https://github.com/xefili/xefili.dev">Github</a>
     </div>
 </div>
+<hidden class="hidden" id="hidden">{lang}</hidden>
 <script is:inline>
+if(document.getElementById("hidden").innerText == "de") {
+    document.getElementById("seachBox").setAttribute("placeholder", "Suche...");
+    document.getElementById("backToStartBTN").setAttribute("href", "/de/Einführung/Übersicht");
+
+}
+
 document.getElementById("searchBox").addEventListener("input", async() => {
     document.getElementById("resultBox").classList.remove("hidden");
     let val = document.getElementById("searchBox").value;

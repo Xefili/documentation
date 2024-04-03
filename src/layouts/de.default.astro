@@ -1,0 +1,19 @@
+---
+import Sidebar from '../components/de.Sidebar.astro';
+import Topbar from '../components/Topbar.astro'
+import '../styles/base.css';
+import '../styles/mdxStyle.css';
+const { frontmatter } = Astro.props;
+---
+
+<div class="w-full text-white">
+    <div class="relative block z-5">
+        <Topbar lang="de" />
+    </div>
+    <div class="flex flex-row">
+        <Sidebar lang="de" active={frontmatter.header} parentSection={frontmatter.parentSection} />
+        <div class="w-full containsMDX">
+            <slot />
+        </div>
+    </div>
+</div>
