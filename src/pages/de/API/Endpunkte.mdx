@@ -1,0 +1,48 @@
+---
+layout: "../../../layouts/de.default.astro"
+header: "Endpunkte"
+parentSection: "api"
+---
+{/* Imports */}
+import Warning from '../../../components/blockquotes/Warning.astro'
+
+# Endpoints
+<customspacer />
+## `/articles`
+
+Dieser Endpunkt erlaubt die Methode `GET` und besitzt idealerweise die folgende Struktur:
+<customspacer />
+```json
+// json
+{
+    "id": 0,
+    "title": "Der Titel des Artikels",
+    "content": "Der Text (kann HTML enthalten, gereinigt)",
+    "time": {
+        "year": 2024,
+        "month": 1,
+        "day": 31,
+        "hhmm": "16:40"
+    },
+    "tags": [
+        "gewöhnlich leer", "nicht implementiert"
+    ],
+    "customLink": null, // reserviert, kann aber auch ein string sein
+}
+```
+<customspacer />
+## `documentation`
+
+Dieser Endpunkt erlaubt die Methode `GET` und besitzt ein Array mit allen Erst- und Zweitüberschriften.
+<Warning content="Dritte Überschriften sind nicht behinhaltet!" title="Warnung" />
+Die Struktur sieht wie folgt aus:
+
+```json
+// json
+{
+    "id": 0,
+    "name": "Seite - Überschrift",
+    "relativeLink": "/Abschnitt/Seite#Überschrift"
+}
+```
+Dieser Endpunkt wird für die Volltextsuche genutzt welche durch die API zur Verfügung gestellt wird.
