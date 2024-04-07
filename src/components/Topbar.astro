@@ -4,7 +4,7 @@ const { lang } = Astro.props;
 
 <div class="w-full h-12 p-2 flex justify-between">
     <div class="align-left">
-        <a id="backToStartBTN" href="/en/Introduction/Overview">Documentation @ v0.0.5</a>
+        <a id="backToStartBTN" href="/en/Introduction/Overview">Documentation @ v0.0.7</a>
     </div>
     <div class="float-center">
         <span class="font-mono">xefili@xefili.dev:~</span>
@@ -33,7 +33,7 @@ if(document.getElementById("hidden").innerText == "de") {
 document.getElementById("searchBox").addEventListener("input", async() => {
     document.getElementById("resultBox").classList.remove("hidden");
     let val = document.getElementById("searchBox").value;
-    let data = await fetch(`https://api.xefili.dev/documentation?name_like=${val}&_limit=2`, {method:"GET"}); // check API reference @ beta.xefili.dev/API/Endpoints
+    let data = await fetch(`https://api.xefili.dev/documentation?name_like=${val}&_limit=2`, {method:"GET", cache:"only-if-cached"}); // check API reference @ beta.xefili.dev/en/API/Endpoints
     let jsonData = await data.json();
     if(jsonData.length == 2) {
         if(val == "") {
@@ -53,5 +53,4 @@ document.getElementById("searchBox").addEventListener("input", async() => {
         document.getElementById("isSecondElement").classList.add("hidden");
     }
 })
-
 </script>
