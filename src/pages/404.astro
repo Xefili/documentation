@@ -4,6 +4,12 @@ import '../styles/base.css';
 
 <div class="text-white w-full text-center">
     <span class="text-[1000%] bg-clip-text font-bold bg-gradient-to-r from-sky-400 to-blue-700 [-webkit-text-fill-color:transparent]">404</span>
+    <div class="flex w-full justify-center -mt-12 mb-4">
+        <el class="h-4 bg-gradient-to-r from-sky-400 to-blue-700 rounded-sm"></el>
+    </div>
     <h1 class="text-4xl mb-2">Nothing here...</h1>
     <p>You probably got here by mistake! Click <a href="/" class="underline underline-offset-4 text-sky-500">here</a> to return to the homepage</p>
 </div>
+<script is:inline>
+document.getElementsByTagName("el")[0].style = (`width: ${Math.round(document.getElementsByTagName("span")[0].getBoundingClientRect().width)}px`)
+</script>
