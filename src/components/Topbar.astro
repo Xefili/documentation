@@ -24,10 +24,13 @@ const { lang } = Astro.props;
     </div>
 </div>
 <hidden class="hidden" id="hidden">{lang}</hidden>
-<script is:inline>
-console.info(await fetch("https://api.xefili.dev/config"));
+<script is:inline type="module">
+let res = await fetch("https://api.xefili.dev/config");
+let jsonRes = await res.json();
+console.info("API config:");
+console.info(jsonRes);
 if(document.getElementById("hidden").innerText == "de") {
-    document.getElementById("seachBox").setAttribute("placeholder", "Suche...");
+    document.getElementById("searchBox").setAttribute("placeholder", "Suche...");
     document.getElementById("backToStartBTN").setAttribute("href", "/de/Einführung/Übersicht");
 
 }
@@ -35,10 +38,9 @@ if(document.getElementById("hidden").innerText == "de") {
 document.getElementById("searchBox").addEventListener("input", async() => {
     document.getElementById("resultBox").classList.remove("hidden");
     let val = document.getElementById("searchBox").value;
-    console.log(val);
-    let data = await fetch(`https://api.xefili.dev/documentationEN?name_like=${val}&_limit=3`, {method:"GET"}); // check API reference @ beta.xefili.dev/en/API/Endpoints
+    let language = window.location.pathname.split("/")[1].toLocaleUpperCase();
+    let data = await fetch(`https://api.xefili.dev/documentation${language}?name_like=${val}&_limit=3`, {method:"GET"}); // check API reference @ beta.xefili.dev/en/API/Endpoints
     let jsonData = await data.json();
-    console.log(jsonData)
     if(jsonData.length == 3) {
         if(val == "") {
             document.getElementById("resultBox").classList.add("hidden");
@@ -46,32 +48,32 @@ document.getElementById("searchBox").addEventListener("input", async() => {
             document.getElementById("resultBox").classList.remove("hidden");
 
             document.getElementsByClassName("li")[0].classList.remove("hidden");
-            document.getElementsByClassName("li")[0].innerHTML = jsonData.en[0].name;
-            document.getElementsByClassName("li")[0].setAttribute("href", jsonData.en[0].relativeLink);
+            document.getElementsByClassName("li")[0].innerHTML = jsonData[0].name;
+            document.getElementsByClassName("li")[0].setAttribute("href", jsonData[0].relativeLink);
 
             document.getElementsByClassName("li")[1].classList.remove("hidden");
-            document.getElementsByClassName("li")[1].innerHTML = jsonData.en[1].name;
-            document.getElementsByClassName("li")[1].setAttribute("href", jsonData.en[1].relativeLink);
+            document.getElementsByClassName("li")[1].innerHTML = jsonData[1].name;
+            document.getElementsByClassName("li")[1].setAttribute("href", jsonData[1].relativeLink);
 
             document.getElementsByClassName("li")[2].classList.remove("hidden");
-            document.getElementsByClassName("li")[2].innerHTML = jsonData.en[1].name;
-            document.getElementsByClassName("li")[2].setAttribute("href", jsonData.en[1].relativeLink);
+            document.getElementsByClassName("li")[2].innerHTML = jsonData[1].name;
+            document.getElementsByClassName("li")[2].setAttribute("href", jsonData[1].relativeLink);
         }
     }
     if(jsonData.length == 2) {
         document.getElementsByClassName("li")[0].classList.remove("hidden");
-        document.getElementsByClassName("li")[0].innerHTML = jsonData.en[0].name;
-        document.getElementsByClassName("li")[0].setAttribute("href", jsonData.en[0].relativeLink);
+        document.getElementsByClassName("li")[0].innerHTML = jsonData[0].name;
+        document.getElementsByClassName("li")[0].setAttribute("href", jsonData[0].relativeLink);
 
         document.getElementsByClassName("li")[1].classList.remove("hidden");
-        document.getElementsByClassName("li")[1].innerHTML = jsonData.en[1].name;
-        document.getElementsByClassName("li")[1].setAttribute("href", jsonData.en[1].relativeLink);
+        document.getElementsByClassName("li")[1].innerHTML = jsonData[1].name;
+        document.getElementsByClassName("li")[1].setAttribute("href", jsonData[1].relativeLink);
         document.getElementById("isThirdElement").classList.add("hidden");
     }
     if(jsonData.length == 1) {
         document.getElementsByClassName("li")[0].classList.remove("hidden");
-        document.getElementsByClassName("li")[0].innerHTML = jsonData.en[0].name;
-        document.getElementsByClassName("li")[0].setAttribute("href", jsonData.en[0].relativeLink);
+        document.getElementsByClassName("li")[0].innerHTML = jsonData[0].name;
+        document.getElementsByClassName("li")[0].setAttribute("href", jsonData[0].relativeLink);
         document.getElementById("isSecondElement").classList.add("hidden");
         document.getElementById("isThirdElement").classList.add("hidden");
     }
