@@ -5,6 +5,7 @@ parentSection: "api"
 ---
 {/* Imports */}
 import Warning from '../../../components/blockquotes/Warning.astro'
+import Tip from '../../../components/blockquotes/Tip.astro'
 
 # Endpoints
 <customspacer />
@@ -31,18 +32,14 @@ This endpoint allows the method `GET` and returns an array of articles, preferab
 }
 ```
 <customspacer />
-## `documentation`
+## `/documentation<LANG>`
 
-This endpoint allows the method `GET` and returns an array of every page, aswell as the first and all second headings on the respective pages.
-<Warning content="Third headings are not supported!" title="Warning" />
-The syntax should look like this:
+This endpoint is used for the full text search and contains references to first and second headings on pages.
+<Warning title="Warning" content="Third headings are not included!" />
 
-```json
-// json
-{
-    "id": 0,
-    "name": "Page - Heading",
-    "relativeLink": "/Section/Page#Heading"
-}
-```
-This endpoint is used for the search, as the api supports full text search.
+When accessed using the method `GET` with `https://api.xefili.dev/documentationEN` it returns an array of all headings in the database. 
+
+### Language Codes
+
+This endpoint is tailored to a specific languages: german (DE) and english (EN). To access the english version, replace `<lang>` with EN.
+<Tip title="Other languages" content="Should I ever support other languages, the language code will be set according to the ISO 3166-1 alpha-2 standart." />

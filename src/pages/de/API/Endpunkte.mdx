@@ -5,6 +5,7 @@ parentSection: "api"
 ---
 {/* Imports */}
 import Warning from '../../../components/blockquotes/Warning.astro'
+import Tip from '../../../components/blockquotes/Tip.astro'
 
 # Endpoints
 <customspacer />
@@ -31,18 +32,14 @@ Dieser Endpunkt erlaubt die Methode `GET` und besitzt idealerweise die folgende 
 }
 ```
 <customspacer />
-## `documentation`
+## `/documentation<LANG>`
 
-Dieser Endpunkt erlaubt die Methode `GET` und besitzt ein Array mit allen Erst- und Zweitüberschriften.
+Dieser Endpunkt wird für die Volltextsuche verwendet und beinhaltet alle Erst- und Zweitüberschriften.
 <Warning content="Dritte Überschriften sind nicht behinhaltet!" title="Warnung" />
-Die Struktur sieht wie folgt aus:
 
-```json
-// json
-{
-    "id": 0,
-    "name": "Seite - Überschrift",
-    "relativeLink": "/Abschnitt/Seite#Überschrift"
-}
-```
-Dieser Endpunkt wird für die Volltextsuche genutzt welche durch die API zur Verfügung gestellt wird.
+Wenn der Endpunkt mit der Methode `GET` mit folgender URL aufgerufen wird; `https://api.xefili.dev/documentationDE`, wird ein Array mit allen Überschriften und deren Links zurückgegeben.
+
+### Sprachcodes
+
+Dieser Endpunkt ist für mehrere Sprachen maßgeschneidert: englisch (EN) und deutsch (DE). Um auf eine bestimmte Sprache zuzugreifen, einfach den Sprachcode in `<LANG>` einsetzen.
+<Tip title="Weitere Sprachen" content="Sollte ich weitere Sprachen hinzufügen, werden die Sprachcodes gemäß ISO 3166-1 alpha-2 implementiert." />
