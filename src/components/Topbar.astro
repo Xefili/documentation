@@ -25,10 +25,6 @@ const { lang } = Astro.props;
 </div>
 <hidden class="hidden" id="hidden">{lang}</hidden>
 <script is:inline type="module">
-let res = await fetch("https://api.xefili.dev/config");
-let jsonRes = await res.json();
-console.info("API config:");
-console.info(jsonRes);
 if(document.getElementById("hidden").innerText == "de") {
     document.getElementById("searchBox").setAttribute("placeholder", "Suche...");
     document.getElementById("backToStartBTN").setAttribute("href", "/de/Einführung/Übersicht");
