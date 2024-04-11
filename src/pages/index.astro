@@ -1,76 +1,13 @@
 ---
 import '../styles/base.css';
 ---
-<body class="text-white">
-    <h1 class="text-2xl font-bold">Documentation</h1>
-    <p>Welcome to the documentation! Here, you can find developer ressources, explanations and more. The documentation is available in english and <a href="de.index" class="underline underline-offset-4 text-sky-500">german</a>.</p>
-    <div class="flex w-full justify-center">
-        <div class="border-[1px] border-[#454545] rounded-lg shadow-xl px-4 py-2">
-            <div class="flex">
-                <span class="py-2 align-middle">$</span>
-                <input placeholder="search..." id="searchBox" class="focus:outline-none p-2 w-96 bg-transparent">
-            </div>
-            <div class="marker-transparent" id="resultBox">
-                <li class="list-none border-[1px] border-[#454545] my-4 p-2"><a class="li p-2"></a></li>
-                <li class="list-none border-[1px] border-[#454545] my-4 p-2"><a class="li p-2" id="isSecondElement"></a></li>
-                <li class="list-none border-[1px] border-[#454545] my-4 p-2"><a class="li p-2" id="isThirdElement"></a></li>
-            </div>
-        </div>
-    </div>
-    <div>
-        <h2 id="conf">Current Config:</h2>
 
+<head>
+    <meta http-equiv="refresh" content="3; URL=/en/Introduction/Overview">
+</head>
+<body>
+    <div class="flex w-full text-center text-white flex-col">
+        <h1 class="font-sans font-bold text-2xl">You're getting redirected!</h1>
+        <p class="font-sans">There isn't any content here right now, so we're redirecting you to the webroot! If your browser doesn't support (doubt it) or allows redirects, please click <a class="underline underline-offset-4 text-sky-500" href="/en/Introduction/Overview">here</a></p>
     </div>
 </body>
-<script is:inline type="module">
-let res = await fetch("https://api.xefili.dev/config");
-let jsonRes = await res.json();
-console.info("API config:");
-console.info(jsonRes);
-let node = document.createElement("span")
-document.getElementById("conf").appendChild(node).innerHTML = `<br>Structure Version: ${jsonRes.structureVersion}<br>Status: ${jsonRes.status}`;
-
-document.getElementById("searchBox").addEventListener("input", async() => {
-    document.getElementById("resultBox").classList.remove("hidden");
-    let val = document.getElementById("searchBox").value;
-    let language = "EN";
-    let data = await fetch(`https://api.xefili.dev/documentation${language}?name_like=${val}&_limit=3`, {method:"GET"}); // check API reference @ beta.xefili.dev/en/API/Endpoints
-    let jsonData = await data.json();
-    if(jsonData.length == 3) {
-        if(val == "") {
-            document.getElementById("resultBox").classList.add("hidden");
-        } else {
-            document.getElementById("resultBox").classList.remove("hidden");
-
-            document.getElementsByClassName("li")[0].classList.toggle("hidden");
-            document.getElementsByClassName("li")[0].innerHTML = jsonData[0].name;
-            document.getElementsByClassName("li")[0].setAttribute("href", jsonData[0].relativeLink);
-
-            document.getElementsByClassName("li")[1].classList.remove("hidden");
-            document.getElementsByClassName("li")[1].innerHTML = jsonData[1].name;
-            document.getElementsByClassName("li")[1].setAttribute("href", jsonData[1].relativeLink);
-
-            document.getElementsByClassName("li")[2].classList.remove("hidden");
-            document.getElementsByClassName("li")[2].innerHTML = jsonData[1].name;
-            document.getElementsByClassName("li")[2].setAttribute("href", jsonData[1].relativeLink);
-        }
-    }
-    if(jsonData.length == 2) {
-        document.getElementsByClassName("li")[0].classList.remove("hidden");
-        document.getElementsByClassName("li")[0].innerHTML = jsonData[0].name;
-        document.getElementsByClassName("li")[0].setAttribute("href", jsonData[0].relativeLink);
-
-        document.getElementsByClassName("li")[1].classList.remove("hidden");
-        document.getElementsByClassName("li")[1].innerHTML = jsonData[1].name;
-        document.getElementsByClassName("li")[1].setAttribute("href", jsonData[1].relativeLink);
-        document.getElementById("isThirdElement").classList.add("hidden");
-    }
-    if(jsonData.length == 1) {
-        document.getElementsByClassName("li")[0].classList.remove("hidden");
-        document.getElementsByClassName("li")[0].innerHTML = jsonData[0].name;
-        document.getElementsByClassName("li")[0].setAttribute("href", jsonData[0].relativeLink);
-        document.getElementById("isSecondElement").classList.add("hidden");
-        document.getElementById("isThirdElement").classList.add("hidden");
-    }
-})
-</script>
