@@ -3,3 +3,26 @@ layout: "../../../layouts/default.astro"
 header: "Media Changes"
 parentSection: "main"
 ---
+import Tip from '../../../components/blockquotes/Tip.astro'
+
+<Tip title="Watch out!" content="This page contains a lot of images and may take longer to load!" />
+
+# Media Changes
+
+To adapt the main page to mobile and tabloid devices, many changes were needed. Here, it was important to keep the look and feel of the website and to use as little javascript as possible.
+<customspacer />
+
+## Current Layout
+
+<img src="../../img1.png" />
+<customspacer />
+
+Because of the smaller width of mobile devices, I couldn't fit all the text in the navigation bar and had to replace it with just the icons. The text is actually added in through CSS:
+
+```html
+<!-- TailwindCSS -->
+<home class="flex items-center font-black mr-8 md:before:content-['Home⠀']"><span class="material-symbols-outlined">home</span></home>
+```
+Here, `md:before:content-[<>]` tells TailwindCSS to add `Home ` infront of the span element if the `md` threshold is met. Therefore, the text will show up on devices witth a width larger than 600px.
+
+As for the links in the main page body, these were all in a CSS grid. Therefore, they only had to be given the same grid column and they were good to go.
