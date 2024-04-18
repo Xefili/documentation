@@ -31,12 +31,65 @@ if(document.getElementById("hidden").innerText == "de") {
 
 }
 
+import Fuse from 'https://cdn.jsdelivr.net/npm/fuse.js@7.0.0/dist/fuse.mjs';
+const data = [
+    {
+        "name": "Main Page - Structure#navbar",
+        "relativeLink": "/en/Main Page/Structure#navigation-bar"
+    },
+    {
+        "name": "Main Page",
+        "relativeLink": "/en/Main Page/Structure"
+    },
+    {
+        "name": "Main Page - Design Choices",
+        "relativeLink": "/en/Main Page/Design Choices"
+    },
+    {
+        "name": "Main Page - Problems",
+        "relativeLink": "/en/Main Page/Problems"
+    },
+    {
+        "name": "Main Page - Media Changes",
+        "relativeLink": "/en/Main Page/Media Changes"
+    },
+
+    {
+        "name": "Blog",
+        "relativeLink": "/en/Blog/Structure"
+    },
+    {
+        "name": "Blog - Design Choices",
+        "relativeLink": "/en/Blog/Design Choices"
+    },
+    {
+        "name": "Blog - Problems",
+        "relativeLink": "/en/Blog/Problems"
+    },
+    {
+        "name": "Blog - Media Changes",
+        "relativeLink": "/en/Blog/Media Changes"
+    },
+
+    {
+        "name": "API - Endpoints",
+        "relativeLink": "/en/API/Endpoints"
+    }
+]
+const options = {
+    includeScore: true,
+    shouldSort: true,
+    keys: ['name']
+}
+
 document.getElementById("searchBox").addEventListener("input", async() => {
     document.getElementById("resultBox").classList.remove("hidden");
     let val = document.getElementById("searchBox").value;
-    let language = window.location.pathname.split("/")[1].toLocaleUpperCase();
-    let data = await fetch(`https://api.xefili.dev/documentation${language}?name_like=${val}&_limit=3`, {method:"GET"}); // check API reference @ beta.xefili.dev/en/API/Endpoints
-    let jsonData = await data.json();
+    let language = window.location.pathname.split("/")[1].toLocaleUpperCase(); // use later
+    const fuse = new Fuse(data, options);
+    let longArray = fuse.search(val);
+    let jsonData = longArray.slice(0, 3);
+    console.info(jsonData);
     if(jsonData.length == 3) {
         if(val == "") {
             document.getElementById("resultBox").classList.add("hidden");
@@ -44,32 +97,32 @@ document.getElementById("searchBox").addEventListener("input", async() => {
             document.getElementById("resultBox").classList.remove("hidden");
 
             document.getElementsByClassName("li")[0].classList.remove("hidden");
-            document.getElementsByClassName("li")[0].innerHTML = jsonData[0].name;
-            document.getElementsByClassName("li")[0].setAttribute("href", jsonData[0].relativeLink);
+            document.getElementsByClassName("li")[0].innerHTML = jsonData[0].item.name;
+            document.getElementsByClassName("li")[0].setAttribute("href", jsonData[0].item.relativeLink);
 
             document.getElementsByClassName("li")[1].classList.remove("hidden");
-            document.getElementsByClassName("li")[1].innerHTML = jsonData[1].name;
-            document.getElementsByClassName("li")[1].setAttribute("href", jsonData[1].relativeLink);
+            document.getElementsByClassName("li")[1].innerHTML = jsonData[1].item.name;
+            document.getElementsByClassName("li")[1].setAttribute("href", jsonData[1].item.relativeLink);
 
             document.getElementsByClassName("li")[2].classList.remove("hidden");
-            document.getElementsByClassName("li")[2].innerHTML = jsonData[1].name;
-            document.getElementsByClassName("li")[2].setAttribute("href", jsonData[1].relativeLink);
+            document.getElementsByClassName("li")[2].innerHTML = jsonData[1].item.name;
+            document.getElementsByClassName("li")[2].setAttribute("href", jsonData[1].item.relativeLink);
         }
     }
     if(jsonData.length == 2) {
         document.getElementsByClassName("li")[0].classList.remove("hidden");
-        document.getElementsByClassName("li")[0].innerHTML = jsonData[0].name;
-        document.getElementsByClassName("li")[0].setAttribute("href", jsonData[0].relativeLink);
+        document.getElementsByClassName("li")[0].innerHTML = jsonData[0].item.name;
+        document.getElementsByClassName("li")[0].setAttribute("href", jsonData[0].item.relativeLink);
 
         document.getElementsByClassName("li")[1].classList.remove("hidden");
-        document.getElementsByClassName("li")[1].innerHTML = jsonData[1].name;
-        document.getElementsByClassName("li")[1].setAttribute("href", jsonData[1].relativeLink);
+        document.getElementsByClassName("li")[1].innerHTML = jsonData[1].item.name;
+        document.getElementsByClassName("li")[1].setAttribute("href", jsonData[1].item.relativeLink);
         document.getElementById("isThirdElement").classList.add("hidden");
     }
     if(jsonData.length == 1) {
         document.getElementsByClassName("li")[0].classList.remove("hidden");
-        document.getElementsByClassName("li")[0].innerHTML = jsonData[0].name;
-        document.getElementsByClassName("li")[0].setAttribute("href", jsonData[0].relativeLink);
+        document.getElementsByClassName("li")[0].innerHTML = jsonData[0].item.name;
+        document.getElementsByClassName("li")[0].setAttribute("href", jsonData[0].item.relativeLink);
         document.getElementById("isSecondElement").classList.add("hidden");
         document.getElementById("isThirdElement").classList.add("hidden");
     }
